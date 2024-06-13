@@ -1,0 +1,38 @@
+body {
+    text-align: center;
+    background-color: rgba(239, 230, 188, 0.861);
+}
+
+h1 {
+    color: rgb(108, 156, 212);
+    border-bottom-style: dotted;
+    padding: 20px;
+}
+
+h2{
+    text-align: center;
+    color: rgb(43, 133, 166);
+    /* border-bottom-style: groove; */
+    padding: 20px;
+}
+
+.h2 p {
+    padding: 20px;
+}
+
+#classes h4 {
+    color: rgb(108, 138, 222);
+    background: rgba(216, 231, 205, 0.876);
+}
+
+ul {
+    list-style: none;
+}
+
+div {
+    display: grid;
+    padding: 5px 5px 5px;
+}
+a {
+    font-size: larger;
+}
