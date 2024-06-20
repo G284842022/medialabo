@@ -29,12 +29,13 @@ function hantei() {
   if (yoso == kotae) {
     console.log("正解です. おめでとう!");
     kaisu += 3;
-  } else {
-    if (kotae < yoso) {
-        console.log("まちがい. 答えはもっと小さいですよ");
-    } else {
-        console.log("まちがい. 答えはもっと大きいですよ");
-    }
+    return;
   }
+  if (kotae < yoso) {
+    console.log("まちがい. 答えはもっと小さいですよ");
+  } else {
+    console.log("まちがい. 答えはもっと大きいですよ");
+  }
+  
   // 課題3-1における出力先はコンソール
 }
