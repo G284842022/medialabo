@@ -46,4 +46,7 @@ let data = {
 };
 
 ////////// 課題3-2 ここからプログラムを書こう
-
+console.log(`都市名: ${data.name}`);
+console.log(`都市名: ${data.weather[0].description}`);
+console.log(`最高気温: ${data.main.temp_max}`);
+console.log(`最低気温: ${data.main.temp_min}`);
