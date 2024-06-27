@@ -20,12 +20,9 @@ n1.style.textEmphasis = "sesame green";
 let ex42 = document.querySelector('h2#ex42');    
 ex42.insertAdjacentElement('afterEnd', n1);  
 
-
 // 練習4-3 写真表作成プログラム
 let ex43 = document.querySelector('div#phototable');    
-let n2 = document.createElement("p");
-let imgs = ["hanako.png", "jiro.png", "taro.png"];
-for(let e of imgs) {
+for(let e of ["hanako.png", "jiro.png", "taro.png"]) {
 	let i = document.createElement("img");
 	i.setAttribute("src", e);
 	let p = document.createElement("p");
@@ -45,4 +42,3 @@ for(let e of data) {
 	l.textContent = e.name + '...' + '緯度'+e.lat+', 経度'+e.lng;
 	ex45.insertAdjacentElement('beforeEnd', l);
 }
-
