@@ -8,13 +8,20 @@ let kaisu = 0;
 // 予想を4回実行する
 // 将来以下の hantei(); の4回の呼び出しを全て削除する
 // 代わりにここでは，ボタンを押したら hantei() を呼び出すイベント処理をする
-hantei();
+document.querySelector('button#answer').addEventListener("click", hantei);
+
 
 // ボタンを押した後の処理をする関数 hantei() の定義
 function hantei() {
   // 将来ここでは 4 ではなくテキストボックスに指定された数値を yoso に代入する
-  let yoso = Math.floor(Math.random()*10) + 1;
+  let yoso = document.querySelector('input[name="answer_value"]').value;
+  console.log(yoso)
+  if(yoso%1!=0 || yoso>10 || yoso<=0){
+    if(kaisu<3)document.querySelector("p#result").textContent = "無効な値です";
+    return;
+  }
 
+  kaisu ++;
   let k = document.querySelector("span#kaisu");
   k.textContent=kaisu;
   console.log(k);
@@ -26,7 +33,6 @@ function hantei() {
   
   // 課題3-1: 正解判定する
   // kotae と yoso が一致するかどうか調べて結果を出力
-  kaisu ++;
   console.log(kaisu+"回目の予想: "+yoso);
   if (kaisu>=3){
     r.textContent = "答えは"+ kotae +"でした. すでにゲームは終わっています";

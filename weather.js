@@ -80,3 +80,12 @@ l.insertAdjacentElement("beforeEnd", p);
 p = document.createElement("p");
 p.textContent = "湿度: "+ data.main.humidity;
 l.insertAdjacentElement("beforeEnd", p);
+
+
+// イベント
+document.querySelector("button#get_result").addEventListener("click", get_result);
+function get_result() {
+  console.log(document.querySelector("input#search").value);
+}
+
+
