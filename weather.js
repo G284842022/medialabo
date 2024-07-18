@@ -46,46 +46,47 @@ let data = {
 };
 
 ////////// 課題3-2 ここからプログラムを書こう
-console.log(`都市名: ${data.name}`);
-console.log(`都市名: ${data.weather[0].description}`);
-console.log(`最高気温: ${data.main.temp_max}`);
-console.log(`最低気温: ${data.main.temp_min}`);
-console.log(`湿度 ${data.main.humidity}`);
+function print(data){
+  console.log(`都市名: ${data.name}`);
+  console.log(`都市名: ${data.weather[0].description}`);
+  console.log(`最高気温: ${data.main.temp_max}`);
+  console.log(`最低気温: ${data.main.temp_min}`);
+  console.log(`湿度 ${data.main.humidity}`);
 
-////////// 課題4-2
-let d = document.querySelector("div#result");
-let u = document.createElement("ul");
-d.insertAdjacentElement("beforeEnd", u);
+  ////////// 課題4-2
+  let d = document.querySelector("div#result");
+  let u = document.createElement("ul");
+  d.insertAdjacentElement("beforeEnd", u);
 
-let l = document.createElement("li");
-u.insertAdjacentElement("beforeEnd", l);
+  let l = document.createElement("li");
+  u.insertAdjacentElement("beforeEnd", l);
 
-d.insertAdjacentElement("beforeEnd", u);
-let h = document.createElement("h3");
-h.textContent = "都市名: "+ data.name;
-l.insertAdjacentElement("beforeEnd", h);
+  d.insertAdjacentElement("beforeEnd", u);
+  let h = document.createElement("h3");
+  h.textContent = "都市名: "+ data.name;
+  l.insertAdjacentElement("beforeEnd", h);
 
-let p = document.createElement("p");
-p.textContent = "天気: "+ data.weather[0].description;
-l.insertAdjacentElement("beforeEnd", p);
+  let p = document.createElement("p");
+  p.textContent = "天気: "+ data.weather[0].description;
+  l.insertAdjacentElement("beforeEnd", p);
 
-p = document.createElement("p");
-p.textContent = "最低気温: "+ data.main.temp_max;
-l.insertAdjacentElement("beforeEnd", p);
+  p = document.createElement("p");
+  p.textContent = "最低気温: "+ data.main.temp_max;
+  l.insertAdjacentElement("beforeEnd", p);
 
-p = document.createElement("p");
-p.textContent = "最高気温: "+ data.main.temp_min;
-l.insertAdjacentElement("beforeEnd", p);
+  p = document.createElement("p");
+  p.textContent = "最高気温: "+ data.main.temp_min;
+  l.insertAdjacentElement("beforeEnd", p);
 
-p = document.createElement("p");
-p.textContent = "湿度: "+ data.main.humidity;
-l.insertAdjacentElement("beforeEnd", p);
-
+  p = document.createElement("p");
+  p.textContent = "湿度: "+ data.main.humidity;
+  l.insertAdjacentElement("beforeEnd", p);
+}
 
 // イベント
 document.querySelector("button#get_result").addEventListener("click", get_result);
 function get_result() {
-  console.log(document.querySelector("input#search").value);
+console.log(document.querySelector("input#search").value);
 }
 
-
+print(data);
