@@ -1,6 +1,6 @@
 body {
     text-align: center;
-    background-color: rgba(239, 230, 188, 0.861);
+    background-color: rgba(230, 230, 230, 0.861);
 }
 
 h1 {
@@ -23,7 +23,7 @@ h2{
 }
 
 #classes h4 {
-    color: rgb(108, 138, 222);
+    color: rgb(108, 138, 102);
     background: rgba(216, 231, 205, 0.876);
     
 }

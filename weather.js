@@ -1,62 +1,7 @@
-let data = {
-  "coord": {
-    "lon": 116.3972,
-    "lat": 39.9075
-  },
-  "weather": [
-    {
-      "id": 803,
-      "main": "Clouds",
-      "description": "曇りがち",
-      "icon": "04d"
-    }
-  ],
-  "base": "stations",
-  "main": {
-    "temp": 9.94,
-    "feels_like": 8.65,
-    "temp_min": 9.94,
-    "temp_max": 9.94,
-    "pressure": 1022,
-    "humidity": 14,
-    "sea_level": 1022,
-    "grnd_level": 1016
-  },
-  "visibility": 10000,
-  "wind": {
-    "speed": 2.65,
-    "deg": 197,
-    "gust": 4.84
-  },
-  "clouds": {
-    "all": 53
-  },
-  "dt": 1646542386,
-  "sys": {
-    "type": 1,
-    "id": 9609,
-    "country": "CN",
-    "sunrise": 1646520066,
-    "sunset": 1646561447
-  },
-  "timezone": 28800,
-  "id": 1816670,
-  "name": "北京市",
-  "cod": 200
-};
-
-
 ////////// 課題3-2 ここからプログラムを書こう
-
 let d = document.querySelector("div#result");
 
 function print(data){
-  console.log(`都市名: ${data.name}`);
-  console.log(`都市名: ${data.weather[0].description}`);
-  console.log(`最高気温: ${data.main.temp_max}`);
-  console.log(`最低気温: ${data.main.temp_min}`);
-  console.log(`湿度 ${data.main.humidity}`);
-
   ////////// 課題4-2
   let u = document.createElement("ul");
   d.insertAdjacentElement("beforeEnd", u);
@@ -84,20 +29,25 @@ function print(data){
   p = document.createElement("p");
   p.textContent = "湿度: "+ data.main.humidity;
   l.insertAdjacentElement("beforeEnd", p);
-
-  // let cs = document.querySelectorAll('input[name="c"]');
-  // for (let c of cs) {
-  //     if (c.checked) {
-  //         console.log(c.value);
-  //     }
-  // }
 }
 
 // イベント
 document.querySelector("button#get_result").addEventListener("click", get_result);
 function get_result() {
-  console.log(document.querySelector("input#search").value);
-  sendRequest(document.querySelector("input#search").value);
+  if(d.childElementCount>0)document.querySelector("div#result > *").remove();
+  let v = document.querySelector("input#search").value;
+  let city_list    = ["カイロ","モスクワ","ヨハネスブルク","北京","東京","シンガポール","シドニー","ロンドン","パリ","リオデジャネイロ","ニューヨーク","ロサンゼルス"];
+  let id_list      = [360630,524901,993800,1816670,1850147,1880252,2147714,2643743,2968815,3451189,5128581,5368361];
+
+  for(let i=0; i<city_list.length; i++) {
+    if (v==city_list[i]) {
+      sendRequest(id_list[i]);
+      return;
+    }
+  }
+  let p = document.createElement("p");
+  p.textContent = "一致する都市の情報が見つかりませんでした";
+  d.insertAdjacentElement("beforeEnd", p);
 }
 
 // 通信を開始する処理
@@ -105,7 +55,6 @@ function sendRequest(id) {
 	// URL を設定
 	let url = 'https://www.nishita-lab.org/web-contents/jsons/openweather/'+id+'.json';
 
-  if(d.childElementCount>0)document.querySelector("div#result > *").remove();
 	// 通信開始
 	axios.get(url)
 		.then(showResult)
@@ -131,10 +80,6 @@ function showResult(resp) {
 // 通信エラーが発生した時の処理
 function showError(err) {
 	console.log(err);
-
-  let p = document.createElement("p");
-  p.textContent = "検索結果が取得できませんでした。";
-  d.insertAdjacentElement("beforeEnd", p);
 }	
 
 // 通信の最後にいつも実行する処理
