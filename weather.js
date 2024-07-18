@@ -45,7 +45,11 @@ let data = {
   "cod": 200
 };
 
+
 ////////// 課題3-2 ここからプログラムを書こう
+
+let d = document.querySelector("div#result");
+
 function print(data){
   console.log(`都市名: ${data.name}`);
   console.log(`都市名: ${data.weather[0].description}`);
@@ -54,7 +58,6 @@ function print(data){
   console.log(`湿度 ${data.main.humidity}`);
 
   ////////// 課題4-2
-  let d = document.querySelector("div#result");
   let u = document.createElement("ul");
   d.insertAdjacentElement("beforeEnd", u);
 
@@ -71,22 +74,70 @@ function print(data){
   l.insertAdjacentElement("beforeEnd", p);
 
   p = document.createElement("p");
-  p.textContent = "最低気温: "+ data.main.temp_max;
+  p.textContent = "最高気温: "+ data.main.temp_max;
   l.insertAdjacentElement("beforeEnd", p);
 
   p = document.createElement("p");
-  p.textContent = "最高気温: "+ data.main.temp_min;
+  p.textContent = "最低気温: "+ data.main.temp_min;
   l.insertAdjacentElement("beforeEnd", p);
 
   p = document.createElement("p");
   p.textContent = "湿度: "+ data.main.humidity;
   l.insertAdjacentElement("beforeEnd", p);
+
+  // let cs = document.querySelectorAll('input[name="c"]');
+  // for (let c of cs) {
+  //     if (c.checked) {
+  //         console.log(c.value);
+  //     }
+  // }
 }
 
 // イベント
 document.querySelector("button#get_result").addEventListener("click", get_result);
 function get_result() {
-console.log(document.querySelector("input#search").value);
+  console.log(document.querySelector("input#search").value);
+  sendRequest(document.querySelector("input#search").value);
 }
 
-print(data);
+// 通信を開始する処理
+function sendRequest(id) {
+	// URL を設定
+	let url = 'https://www.nishita-lab.org/web-contents/jsons/openweather/'+id+'.json';
+
+  if(d.childElementCount>0)document.querySelector("div#result > *").remove();
+	// 通信開始
+	axios.get(url)
+		.then(showResult)
+		.catch(showError)
+		.then(finish);
+}
+
+// 通信が成功した時の処理
+function showResult(resp) {
+	// サーバから送られてきたデータを出力
+	let data = resp.data;
+
+	// data が文字列型なら，オブジェクトに変換する
+	if (typeof data === 'string') {
+		data = JSON.parse(data);
+	}
+
+	// data をコンソールに出力
+	console.log(data);
+  print(data);
+}
+
+// 通信エラーが発生した時の処理
+function showError(err) {
+	console.log(err);
+
+  let p = document.createElement("p");
+  p.textContent = "検索結果が取得できませんでした。";
+  d.insertAdjacentElement("beforeEnd", p);
+}	
+
+// 通信の最後にいつも実行する処理
+function finish() {
+	console.log('Ajax 通信が終わりました');
+}
